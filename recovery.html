@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>TECH-World Data Recovery — TECH-WORLD</title>
+<meta name="description" content="Sector-level recovery for USB drives, SD cards, and disk images." />
+<link rel="stylesheet" href="styles.css" />
+
+</head>
+<body>
+<canvas id="neuralCanvas"></canvas>
+<div class="page-vignette"></div>
+<nav>
+  <div class="wrap">
+    <a href="index.html" class="nav-brand">
+      <img src="logo-tw.png" alt="TECH-WORLD logo" />
+    </a>
+    <button class="nav-toggle" onclick="toggleNav()">&#9776;</button>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="products.html">Products</a>
+      <a href="features.html">Features</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="about.html">About</a>
+      <a href="faq.html">FAQ</a>
+      <a href="contact.html">Contact</a>
+      <a href="download.html" class="nav-cta">Download</a>
+    </div>
+  </div>
+</nav>
+
+<section class="page-hero">
+  <div class="wrap">
+    <div class="eyebrow reveal"><span class="dot"></span> LIVE NOW</div>
+    <h1 class="reveal">TECH-World Data Recovery</h1>
+    <p class="sub reveal">Sector-level recovery for USB drives, SD cards, and disk images — with forensic-grade verification.</p>
+    <div class="hero-ctas reveal">
+      <button class="btn-primary" onclick="pendingDownloadUrl='#'; openModal('licenseModal')">Download for Windows &nbsp;&rarr;</button>
+      <a href="pricing.html" class="btn-ghost">See pricing</a>
+    </div>
+  </div>
+</section>
+<section>
+  <div class="wrap">
+    <span class="section-label reveal">// What it does</span>
+    <h2 class="section-title reveal">Recover what you thought was gone.</h2>
+    <p class="section-desc reveal">A multi-threaded scan engine sweeps your drive sector by sector, identifies recoverable files by binary signature, and reconstructs them using format-aware trailer detection — so recovered files actually open.</p>
+    <div class="features-grid reveal">
+      <div class="feature-item"><div class="f-icon">&#9889;</div><h4>Multi-threaded scanning</h4><p>Virtual-thread engine sweeps large drives fast without freezing the UI.</p></div>
+      <div class="feature-item"><div class="f-icon">&#127919;</div><h4>Trailer-aware carving</h4><p>Finds the real end of each file — not a guess.</p></div>
+      <div class="feature-item"><div class="f-icon">&#128272;</div><h4>Nothing leaves your PC</h4><p>No cloud upload, no telemetry, ever.</p></div>
+      <div class="feature-item"><div class="f-icon">&#128203;</div><h4>Forensic Mode</h4><p>SHA-256 hash logging and exportable case reports.</p></div>
+      <div class="feature-item"><div class="f-icon">&#129513;</div><h4>Duplicate Cleaner</h4><p>Finds exact and visually similar photos.</p></div>
+      <div class="feature-item"><div class="f-icon">&#128190;</div><h4>Database Viewer</h4><p>Open recovered SQLite databases and export to CSV.</p></div>
+    </div>
+  </div>
+</section>
+<section>
+  <div class="wrap center" style="max-width:640px;">
+    <span class="section-label reveal">// Formats supported</span>
+    <h2 class="section-title reveal center">JPG &middot; PNG &middot; PDF &middot; DOCX &middot; SQLite</h2>
+    <p class="section-desc reveal center">More formats are added as the engine grows — Office documents, video containers, and archive formats are on the roadmap.</p>
+    <div class="hero-ctas reveal" style="margin-top:32px;">
+      <button class="btn-primary" onclick="pendingDownloadUrl='#'; openModal('licenseModal')">Download for Windows &nbsp;&rarr;</button>
+    </div>
+  </div>
+</section>
+
+<div class="modal-backdrop" id="licenseModal">
+  <div class="modal-box" style="max-width:480px;">
+    <div class="modal-close" onclick="closeModal('licenseModal')">&#10005;</div>
+    <div class="modal-header">
+      <h2>Enter Your License Key</h2>
+      <p>The Windows download requires a valid TECH-World license. Don't have one? <a href="pricing.html" style="color:var(--teal)">See pricing</a>.</p>
+    </div>
+    <div class="modal-body">
+      <textarea class="license-input" id="licenseKeyInput" placeholder="Paste your license key here..."></textarea>
+      <div class="license-status" id="licenseStatus"></div>
+      <div class="modal-actions">
+        <button class="btn-primary" style="flex:1; justify-content:center;" onclick="verifyAndDownload()">Verify &amp; Download</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-top">
+      <div>
+        <a href="index.html" class="footer-brand">
+          <img src="logo-tw.png" alt="TECH-WORLD logo" />
+        </a>
+        <p class="footer-tagline">Practical recovery &amp; utility software by Zarar Shakir.</p>
+        <div class="social-row">
+          <a href="https://www.instagram.com/techworld._official?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener" class="social-icon" aria-label="Instagram" title="Instagram">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+          </a>
+          <a href="https://web.facebook.com/zarar.waleed.2025" target="_blank" rel="noopener" class="social-icon" aria-label="Facebook" title="Facebook">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+          </a>
+          <a href="mailto:techworld.official@outlook.com" class="social-icon" aria-label="Email" title="Email">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 6l10 7 10-7"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="footer-cols">
+        <div class="footer-col">
+          <h5>Product</h5>
+          <a href="recovery.html">Data Recovery</a>
+          <a href="android.html">Android (soon)</a>
+          <a href="pricing.html">Pricing</a>
+        </div>
+        <div class="footer-col">
+          <h5>Company</h5>
+          <a href="about.html">About</a>
+          <a href="faq.html">FAQ</a>
+          <a href="mailto:techworld.official@outlook.com">Contact</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 TECH-World by Zarar Shakir. All rights reserved.</span>
+      <span class="mono">Made with Java &amp; JavaFX</span>
+    </div>
+  </div>
+</footer>
+<script src="main.js"></script>
+</body>
+</html>

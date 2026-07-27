@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Home — TECH-WORLD</title>
+<meta name="description" content="Software by Zarar Shakir — TECH-World Data Recovery and future Android & Windows apps." />
+<link rel="stylesheet" href="styles.css" />
+
+</head>
+<body>
+<canvas id="neuralCanvas"></canvas>
+<div class="page-vignette"></div>
+<nav>
+  <div class="wrap">
+    <a href="index.html" class="nav-brand">
+      <img src="logo-tw.png" alt="TECH-WORLD logo" />
+    </a>
+    <button class="nav-toggle" onclick="toggleNav()">&#9776;</button>
+    <div class="nav-links">
+      <a href="index.html" class="active">Home</a>
+      <a href="products.html">Products</a>
+      <a href="features.html">Features</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="about.html">About</a>
+      <a href="faq.html">FAQ</a>
+      <a href="contact.html">Contact</a>
+      <a href="download.html" class="nav-cta">Download</a>
+    </div>
+  </div>
+</nav>
+
+<section class="hero" id="slide-0" data-slide="0">
+  <div class="wrap">
+    <div class="eyebrow"><span class="dot"></span> BY ZARAR SHAKIR</div>
+    <h1>Software that finds<br/>what you thought was gone.</h1>
+    <p class="sub">TECH-World builds practical recovery and utility software — starting with TECH-World Data Recovery for Windows, with Android and more on the way.</p>
+    <div class="hero-ctas">
+      <a href="products.html" class="btn-primary">Explore Products &nbsp;&rarr;</a>
+      <a href="about.html" class="btn-ghost">About Zarar</a>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat"><b>5+</b><span>File formats recovered</span></div>
+      <div class="hero-stat"><b>SHA&#8209;256</b><span>Forensic verification</span></div>
+      <div class="hero-stat"><b>100%</b><span>Local — nothing uploaded</span></div>
+    </div>
+  </div>
+  <div class="scroll-hint" onclick="advanceSlide()">
+    <span>Press <kbd>Enter</kbd> or scroll</span>
+    <div class="scroll-hint-arrow">&#9660;</div>
+  </div>
+</section>
+
+<section id="slide-1" data-slide="1">
+  <div class="wrap">
+    <span class="section-label reveal">// Featured</span>
+    <h2 class="section-title reveal">TECH-World Data Recovery</h2>
+    <p class="section-desc reveal">Our flagship product. Sector-level scanning, forensic-grade verification, and a free tier to try it risk-free.</p>
+    <div class="products-grid" style="margin-top:40px;">
+      <div class="product-card featured" onclick="window.location.href='recovery.html'">
+        <div class="product-icon">&#128190;</div>
+        <span class="product-status status-live">Live now</span>
+        <h3>TECH-World Data Recovery</h3>
+        <p>Recovers JPG, PNG, PDF, DOCX and SQLite databases with forensic-grade hash verification.</p>
+        <span class="product-link">View details &rarr;</span>
+      </div>
+      <div class="product-card" onclick="window.location.href='android.html'">
+        <div class="product-icon">&#128241;</div>
+        <span class="product-status status-soon">Coming soon</span>
+        <h3>TECH-World for Android</h3>
+        <p>Smart duplicate cleanup and guided recovery, built for what Android actually allows.</p>
+        <span class="product-link">View details &rarr;</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-top">
+      <div>
+        <a href="index.html" class="footer-brand">
+          <img src="logo-tw.png" alt="TECH-WORLD logo" />
+        </a>
+        <p class="footer-tagline">Practical recovery &amp; utility software by Zarar Shakir.</p>
+        <div class="social-row">
+          <a href="https://www.instagram.com/techworld._official?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener" class="social-icon" aria-label="Instagram" title="Instagram">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+          </a>
+          <a href="https://web.facebook.com/zarar.waleed.2025" target="_blank" rel="noopener" class="social-icon" aria-label="Facebook" title="Facebook">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+          </a>
+          <a href="mailto:techworld.official@outlook.com" class="social-icon" aria-label="Email" title="Email">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 6l10 7 10-7"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="footer-cols">
+        <div class="footer-col">
+          <h5>Product</h5>
+          <a href="recovery.html">Data Recovery</a>
+          <a href="android.html">Android (soon)</a>
+          <a href="pricing.html">Pricing</a>
+        </div>
+        <div class="footer-col">
+          <h5>Company</h5>
+          <a href="about.html">About</a>
+          <a href="faq.html">FAQ</a>
+          <a href="mailto:techworld.official@outlook.com">Contact</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 TECH-World by Zarar Shakir. All rights reserved.</span>
+      <span class="mono">Made with Java &amp; JavaFX</span>
+    </div>
+  </div>
+</footer>
+<script src="main.js"></script>
+</body>
+</html>

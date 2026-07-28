@@ -78,6 +78,11 @@ nav .wrap{ display:flex; align-items:center; justify-content:space-between; heig
 .slide-transition-overlay{ position:fixed; inset:0; z-index:200; background:var(--void); opacity:0;
   pointer-events:none; transition:opacity .35s ease; }
 .slide-transition-overlay.active{ opacity:1; }
+.page-slide-wrap{ border-top:1px solid var(--line); }
+.page-slide-wrap .page-hero{ min-height:auto; padding-top:60px; }
+.page-slide-wrap .page-hero .wrap{ padding:36px 28px 20px; }
+.page-slide-wrap section{ padding:30px 0 70px; }
+.page-slide-wrap section:first-of-type{ padding-top:0; }
 
 .hero-ctas{ display:flex; gap:16px; justify-content:center; margin-top:40px; flex-wrap:wrap; }
 .btn-primary, .btn-ghost{ font-weight:600; font-size:14.5px; padding:15px 32px; border-radius:8px;

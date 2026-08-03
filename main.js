@@ -172,6 +172,29 @@ document.addEventListener('DOMContentLoaded', () => {
   window.addEventListener('mouseleave', () => { mouse.x = -9999; mouse.y = -9999; });
   const CONNECT_RADIUS = 160;
 
+  // --- Profile photo: particles connect to it, and it gently parallax-follows the mouse ---
+  const profileWrap = document.getElementById('profileWrap');
+  const profileRing = profileWrap ? profileWrap.querySelector('.profile-photo-ring') : null;
+  let photoCenter = null;
+  function updatePhotoCenter() {
+    if (!profileWrap) { photoCenter = null; return; }
+    const rect = profileWrap.getBoundingClientRect();
+    photoCenter = { x: rect.left + rect.width / 2, y: rect.top + rect.height / 2 + window.scrollY };
+  }
+  updatePhotoCenter();
+  window.addEventListener('resize', updatePhotoCenter);
+  window.addEventListener('scroll', updatePhotoCenter);
+  const PHOTO_CONNECT_RADIUS = 260;
+
+  if (profileRing) {
+    window.addEventListener('mousemove', e => {
+      const cx = window.innerWidth / 2, cy = window.innerHeight / 2;
+      const offsetX = ((e.clientX - cx) / cx) * 14;   // max ~14px shift
+      const offsetY = ((e.clientY - cy) / cy) * 14;
+      profileRing.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
+    });
+  }
+
   function tick(){
     ctx.clearRect(0, 0, W, H);
     const scrollY = window.scrollY;
@@ -180,6 +203,7 @@ document.addEventListener('DOMContentLoaded', () => {
       p.y -= p.vy;
       if (p.y < -10) { p.y = H + 10; p.x = Math.random() * W; }
       if (p.y < viewTop - 100 || p.y > viewBottom + 100) continue;
+
       const dx = p.x - mouse.x, dy = p.y - mouse.y;
       const dist = Math.sqrt(dx*dx + dy*dy);
       if (dist < CONNECT_RADIUS) {
@@ -188,6 +212,18 @@ document.addEventListener('DOMContentLoaded', () => {
         ctx.lineWidth = 1;
         ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(mouse.x, mouse.y); ctx.stroke();
       }
+
+      if (photoCenter) {
+        const pdx = p.x - photoCenter.x, pdy = p.y - photoCenter.y;
+        const pdist = Math.sqrt(pdx*pdx + pdy*pdy);
+        if (pdist < PHOTO_CONNECT_RADIUS) {
+          const palpha = (1 - pdist / PHOTO_CONNECT_RADIUS) * 0.35;
+          ctx.strokeStyle = `rgba(124,58,237,${palpha})`;
+          ctx.lineWidth = 1;
+          ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(photoCenter.x, photoCenter.y); ctx.stroke();
+        }
+      }
+
       const grad = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r * 3);
       grad.addColorStop(0, `rgba(${p.color},${p.a})`);
       grad.addColorStop(1, `rgba(${p.color},0)`);

@@ -33,9 +33,7 @@
 <section class="hero" id="slide-0" data-slide="0">
   <div class="wrap">
     <div class="profile-parallax-wrap" id="profileWrap">
-      <div class="profile-photo-ring">
-        <img src="profile.jpg" alt="Zarar Shakir" class="profile-photo" />
-      </div>
+      <div id="three3dPhoto"></div>
     </div>
     <div class="eyebrow"><span class="dot"></span> BY ZARAR SHAKIR</div>
     <h1>Software that finds<br/>what you thought was gone.</h1>
@@ -413,5 +411,75 @@ opts.forEach(opt => {
   </div>
 </footer>
 <script src="main.js"></script>
+<script type="module">
+import * as THREE from './three.module.min.js';
+
+const container = document.getElementById('three3dPhoto');
+if (container) {
+  const size = 190;
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(35, 1, 0.1, 100);
+  camera.position.z = 4;
+
+  const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+  renderer.setSize(size, size);
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  container.appendChild(renderer.domElement);
+
+  // Group holds the photo disc + glow ring so they rotate together
+  const group = new THREE.Group();
+  scene.add(group);
+
+  const textureLoader = new THREE.TextureLoader();
+  const photoTexture = textureLoader.load('profile.jpg');
+  photoTexture.colorSpace = THREE.SRGBColorSpace;
+
+  // Front disc: the photo, slightly domed via a low-poly sphere-cap for real depth
+  const discGeo = new THREE.CylinderGeometry(1.35, 1.35, 0.22, 64);
+  const discMat = new THREE.MeshStandardMaterial({ map: photoTexture, roughness: 0.55, metalness: 0.1 });
+  const sideMat = new THREE.MeshStandardMaterial({ color: 0x0b0b20, roughness: 0.7 });
+  const disc = new THREE.Mesh(discGeo, [sideMat, discMat, discMat]);
+  disc.rotation.x = Math.PI / 2;
+  group.add(disc);
+
+  // Glowing rim ring (brand teal/indigo), sits just behind the disc edge
+  const ringGeo = new THREE.TorusGeometry(1.42, 0.045, 16, 100);
+  const ringMat = new THREE.MeshBasicMaterial({ color: 0x38bdf8 });
+  const ring = new THREE.Mesh(ringGeo, ringMat);
+  group.add(ring);
+
+  // Lighting: soft key light + brand-colored rim lights for a premium glow
+  scene.add(new THREE.AmbientLight(0xffffff, 0.7));
+  const keyLight = new THREE.DirectionalLight(0xffffff, 1.1);
+  keyLight.position.set(2, 3, 4);
+  scene.add(keyLight);
+  const rimTeal = new THREE.PointLight(0x38bdf8, 2.2, 8);
+  rimTeal.position.set(-2, 1, 2);
+  scene.add(rimTeal);
+  const rimIndigo = new THREE.PointLight(0x7c3aed, 2.0, 8);
+  rimIndigo.position.set(2, -1.5, 2);
+  scene.add(rimIndigo);
+
+  // Mouse-driven rotation (real 3D, not CSS) — smoothed with lerp each frame
+  let targetRotX = 0, targetRotY = 0;
+  window.addEventListener('mousemove', e => {
+    const nx = (e.clientX / window.innerWidth) * 2 - 1;   // -1..1
+    const ny = (e.clientY / window.innerHeight) * 2 - 1;  // -1..1
+    targetRotY = nx * 0.55;   // left/right look
+    targetRotX = ny * 0.35;   // up/down look
+  });
+
+  let autoT = 0;
+  function animate() {
+    requestAnimationFrame(animate);
+    autoT += 0.003;
+    group.rotation.y += (targetRotY - group.rotation.y) * 0.06;
+    group.rotation.x += (-targetRotX - group.rotation.x) * 0.06;
+    ring.rotation.z += 0.004; // slow independent ring spin for a "living" feel
+    renderer.render(scene, camera);
+  }
+  animate();
+}
+</script>
 </body>
 </html>

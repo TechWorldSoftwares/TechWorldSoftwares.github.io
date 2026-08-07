@@ -172,9 +172,9 @@ document.addEventListener('DOMContentLoaded', () => {
   window.addEventListener('mouseleave', () => { mouse.x = -9999; mouse.y = -9999; });
   const CONNECT_RADIUS = 160;
 
-  // --- Profile photo: particles connect to it, and it gently parallax-follows the mouse ---
+  // --- Neural threads connect to the photo's on-screen position ---
+  // (the photo itself now rotates in real 3D via Three.js, see the module script in index.html)
   const profileWrap = document.getElementById('profileWrap');
-  const profileRing = profileWrap ? profileWrap.querySelector('.profile-photo-ring') : null;
   let photoCenter = null;
   function updatePhotoCenter() {
     if (!profileWrap) { photoCenter = null; return; }
@@ -185,15 +185,6 @@ document.addEventListener('DOMContentLoaded', () => {
   window.addEventListener('resize', updatePhotoCenter);
   window.addEventListener('scroll', updatePhotoCenter);
   const PHOTO_CONNECT_RADIUS = 260;
-
-  if (profileRing) {
-    window.addEventListener('mousemove', e => {
-      const cx = window.innerWidth / 2, cy = window.innerHeight / 2;
-      const offsetX = ((e.clientX - cx) / cx) * 14;   // max ~14px shift
-      const offsetY = ((e.clientY - cy) / cy) * 14;
-      profileRing.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
-    });
-  }
 
   function tick(){
     ctx.clearRect(0, 0, W, H);

@@ -146,19 +146,3 @@ document.addEventListener('DOMContentLoaded',()=>{
   }
   requestAnimationFrame(frame);
 });
-
-/* Cinematic portrait parallax */
-document.addEventListener('DOMContentLoaded',()=>{
-  const stage=document.getElementById('cinematicStage');
-  const portrait=document.getElementById('portraitWrap');
-  if(!stage||!portrait||window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
-  let rx=0,ry=0,tx=0,ty=0;
-  stage.addEventListener('mousemove',e=>{
-    const r=stage.getBoundingClientRect();
-    tx=((e.clientX-r.left)/r.width-.5)*12;
-    ty=((e.clientY-r.top)/r.height-.5)*-10;
-  },{passive:true});
-  stage.addEventListener('mouseleave',()=>{tx=0;ty=0},{passive:true});
-  function tick(){rx+=(tx-rx)*.07;ry+=(ty-ry)*.07;portrait.style.transform=`translate(-50%,-50%) rotateY(${rx}deg) rotateX(${ry}deg)`;requestAnimationFrame(tick)}
-  requestAnimationFrame(tick);
-});

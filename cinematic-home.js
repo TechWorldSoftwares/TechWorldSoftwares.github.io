@@ -1,0 +1,18 @@
+(() => {
+  const canvas=document.getElementById('tw-neural'), ctx=canvas.getContext('2d');
+  let W=innerWidth,H=innerHeight,D=Math.min(devicePixelRatio||1,1.5), mouse={x:W*.5,y:H*.5,tx:W*.5,ty:H*.5};
+  const N=window.innerWidth<700?70:135, pts=[];
+  for(let i=0;i<N;i++) pts.push({x:Math.random()*W,y:Math.random()*H,z:.25+Math.random()*.9,vx:(Math.random()-.5)*.18,vy:(Math.random()-.5)*.18,r:.7+Math.random()*1.5,p:Math.random()*6.28});
+  function resize(){W=innerWidth;H=innerHeight;canvas.width=W*D;canvas.height=H*D;canvas.style.width=W+'px';canvas.style.height=H+'px';ctx.setTransform(D,0,0,D,0,0)} resize(); addEventListener('resize',resize,{passive:true});
+  addEventListener('pointermove',e=>{mouse.tx=e.clientX;mouse.ty=e.clientY;document.documentElement.style.setProperty('--mx',((e.clientX/W)-.5).toFixed(3));document.documentElement.style.setProperty('--my',((e.clientY/H)-.5).toFixed(3))},{passive:true});
+  function draw(t){mouse.x+=(mouse.tx-mouse.x)*.08;mouse.y+=(mouse.ty-mouse.y)*.08;ctx.clearRect(0,0,W,H);for(const p of pts){p.x+=p.vx;p.y+=p.vy;if(p.x<-20)p.x=W+20;if(p.x>W+20)p.x=-20;if(p.y<-20)p.y=H+20;if(p.y>H+20)p.y=-20;const dx=p.x-mouse.x,dy=p.y-mouse.y,d=Math.hypot(dx,dy);if(d<180){p.x+=(dx/d)*.08*(1-d/180);p.y+=(dy/d)*.08*(1-d/180)}ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle=p.p%2>1?'rgba(155,92,255,.75)':'rgba(65,217,255,.72)';ctx.shadowBlur=9;ctx.shadowColor=p.p%2>1?'#9a5cff':'#41d9ff';ctx.fill();ctx.shadowBlur=0}
+    for(let i=0;i<N;i++)for(let j=i+1;j<N;j++){const a=pts[i],b=pts[j],d=Math.hypot(a.x-b.x,a.y-b.y);if(d<105){ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.strokeStyle=`rgba(75,190,255,${(1-d/105)*.15})`;ctx.lineWidth=.7;ctx.stroke()}}
+    for(const p of pts){const d=Math.hypot(p.x-mouse.x,p.y-mouse.y);if(d<170){ctx.beginPath();ctx.moveTo(p.x,p.y);ctx.lineTo(mouse.x,mouse.y);ctx.strokeStyle=`rgba(100,210,255,${(1-d/170)*.55})`;ctx.lineWidth=.9;ctx.stroke()}}
+    requestAnimationFrame(draw)} requestAnimationFrame(draw);
+
+  const nav=document.querySelector('.tw-nav'), links=document.querySelector('.tw-navlinks'), menu=document.querySelector('.tw-menu'); menu?.addEventListener('click',()=>links.classList.toggle('open')); links?.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>links.classList.remove('open')));
+  const cursor=document.querySelector('.tw-cursor'); addEventListener('pointermove',e=>{if(cursor){cursor.style.left=e.clientX+'px';cursor.style.top=e.clientY+'px'}}); document.querySelectorAll('a,button').forEach(el=>{el.addEventListener('mouseenter',()=>cursor?.style.setProperty('transform','translate(-50%,-50%) scale(1.5)'));el.addEventListener('mouseleave',()=>cursor?.style.setProperty('transform','translate(-50%,-50%) scale(1)'))});
+  const stage=document.getElementById('twStage'), portrait=document.getElementById('portraitCard'); stage?.addEventListener('pointermove',e=>{const r=stage.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;portrait.style.transform=`translate3d(${x*16}px,${y*12}px,30px) rotateY(${x*9}deg) rotateX(${-y*7}deg)`}); stage?.addEventListener('pointerleave',()=>portrait.style.transform='');
+  const progress=document.querySelector('.tw-progress i'); addEventListener('scroll',()=>{const max=document.documentElement.scrollHeight-innerHeight;progress.style.transform=`scaleX(${max?scrollY/max:0})`;nav.style.transform=`translateY(${Math.min(scrollY*.04,8)}px)`},{passive:true});
+  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('seen')}),{threshold:.15}); document.querySelectorAll('.tw-story-grid,.tw-product,.tw-skill-list div,.tw-final h2').forEach(e=>io.observe(e));
+})();

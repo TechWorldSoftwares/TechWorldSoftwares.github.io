@@ -1,179 +1,101 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
+<meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Muhammad Zarar Waleed — TECH-WORLD SOFTWARES</title>
-<meta name="description" content="Muhammad Zarar Waleed — Software Engineering student, Full-Stack Developer, Data Analyst, UI/UX Designer and Java Developer.">
+<meta name="description" content="Muhammad Zarar Waleed — Software Engineering student, Full-Stack Developer, Data Analyst and UI/UX Designer. TECH-WORLD SOFTWARES portfolio.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="cinematic-home.css">
 </head>
-<body class="cinematic-home">
-<canvas id="neuralCanvas" aria-hidden="true"></canvas>
-<canvas id="ribbonCanvas" aria-hidden="true"></canvas>
-<div class="cinematic-noise" aria-hidden="true"></div>
-<div class="page-vignette"></div>
-<div class="scroll-line" aria-hidden="true"><span></span></div>
+<body class="tw-cinema">
+<canvas id="tw-neural"></canvas>
+<div class="tw-grain"></div>
+<div class="tw-grid"></div>
+<div class="tw-vignette"></div>
+<div class="tw-cursor"><span></span></div>
+<div class="tw-progress"><i></i></div>
 
-<nav class="cinematic-nav">
-  <div class="wrap nav-shell">
-    <a class="nav-brand" href="index.html"><img src="logo-tw.png" alt="TECH-WORLD SOFTWARES"></a>
-    <div class="nav-links">
-      <a class="active" href="index.html">Home</a>
-      <a href="about.html">About</a><a href="products.html">Projects</a><a href="features.html">Skills</a>
-      <a href="services.html">Services</a><a href="experience.html">Experience</a><a href="certificates.html">Certificates</a><a href="contact.html">Contact</a>
-    </div>
-    <button class="nav-toggle" onclick="toggleNav()" aria-label="Open navigation">☰</button>
+<nav class="tw-nav" id="twNav">
+  <a href="index.html" class="tw-brand"><img src="logo-tw.png" alt="TECH-WORLD SOFTWARES"><span>TECH-WORLD<br><b>BY ZARAR SHAKIR</b></span></a>
+  <div class="tw-navlinks">
+    <a class="active" href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="products.html">Projects</a>
+    <a href="services.html">Services</a>
+    <a href="experience.html">Experience</a>
+    <a href="certificates.html">Certificates</a>
+    <a href="contact.html">Contact</a>
   </div>
+  <button class="tw-menu" aria-label="Open menu">☰</button>
 </nav>
 
 <main>
-<section class="cin-hero">
-  <div class="hero-scanline"></div>
-  <div class="wrap cin-hero-grid">
-    <div class="cin-copy">
-      <div class="cin-kicker"><i></i> TECH-WORLD SOFTWARES <span>·</span> BY ZARAR SHAKIR</div>
-      <div class="cin-index">01 <span>/</span> 04</div>
-      <h1><span>Build.</span><br><em>Connect.</em><br><strong>Innovate.</strong></h1>
-      <p class="cin-intro">I build software products where <b>code, data, design and intelligence</b> meet.</p>
-      <div class="cin-meta">
-        <span>SOFTWARE ENGINEERING</span><span>FULL-STACK</span><span>DATA</span><span>UI / UX</span>
+<section class="tw-hero" id="top">
+  <div class="tw-hero-inner">
+    <div class="tw-copy">
+      <div class="tw-eyebrow"><span></span> SOFTWARE ENGINEERING · FULL-STACK · DATA · AI</div>
+      <div class="tw-count">01 <b>/</b> 05</div>
+      <h1><span>BUILD</span><em>THE</em><strong>FUTURE.</strong></h1>
+      <p class="tw-lead">I'm <b>Muhammad Zarar Waleed</b> — a Software Engineering student building real-world software where <span>code, data, design and intelligence</span> connect.</p>
+      <div class="tw-actions">
+        <a class="tw-btn" href="products.html">Explore my work <b>↗</b></a>
+        <a class="tw-link" href="#story">Discover the story <b>↓</b></a>
       </div>
-      <div class="cin-actions">
-        <a class="cin-btn primary" href="products.html"><span>Explore Work</span><b>↗</b></a>
-        <a class="cin-btn text" href="#about"><span>Scroll to explore</span><b>↓</b></a>
+      <div class="tw-mini-stats"><div><b>02+</b><span>YEARS<br>EXPERIENCE</span></div><div><b>03</b><span>REAL-WORLD<br>PRODUCTS</span></div><div><b>∞</b><span>IDEAS TO<br>BUILD</span></div></div>
+    </div>
+
+    <div class="tw-stage" id="twStage">
+      <div class="stage-light light-one"></div><div class="stage-light light-two"></div>
+      <div class="stage-ring ring-one"></div><div class="stage-ring ring-two"></div><div class="stage-ring ring-three"></div>
+      <div class="stage-core"></div>
+      <div class="stage-orbit orbit-one"><i></i></div><div class="stage-orbit orbit-two"><i></i></div>
+      <div class="portrait-card" id="portraitCard">
+        <div class="portrait-shadow"></div>
+        <div class="portrait-border"></div>
+        <img src="profile.jpg" alt="Muhammad Zarar Waleed">
+        <div class="portrait-shine"></div>
       </div>
-    </div>
-
-    <div class="cin-visual" id="heroVisual">
-      <div class="visual-halo halo-a"></div><div class="visual-halo halo-b"></div>
-      <div class="visual-orbit orbit-a"></div><div class="visual-orbit orbit-b"></div>
-      <div class="visual-rings"><span></span><span></span><span></span></div>
-      <div class="portrait-wrap" id="portraitWrap">
-        <div class="portrait-backlight"></div>
-        <img src="profile.jpg" alt="Muhammad Zarar Waleed" class="portrait">
-        <div class="portrait-glass"></div>
-      </div>
-      <div class="float-chip chip-a"><small>BUILDING</small><b>REAL-WORLD<br>SOFTWARE</b></div>
-      <div class="float-chip chip-b"><small>FOCUS</small><b>CODE × DATA<br>× DESIGN</b></div>
-      <div class="float-chip chip-c"><small>BASED IN</small><b>PUNJAB,<br>PAKISTAN</b></div>
-      <div class="visual-mark">Z<span>·</span>S</div>
+      <div class="float-card fc-one"><small>ROLE</small><b>FULL-STACK<br>DEVELOPER</b></div>
+      <div class="float-card fc-two"><small>BUILDING WITH</small><b>JAVA · PYTHON<br>WEB · DATA · AI</b></div>
+      <div class="float-card fc-three"><small>LOCATION</small><b>PUNJAB<br>PAKISTAN</b></div>
+      <div class="stage-code">TECH-WORLD<span>_SOFTWARES</span></div>
+      <div class="stage-mark">ZS</div>
     </div>
   </div>
-  <div class="hero-bottom">
-    <span>MOVE YOUR CURSOR</span><div class="mouse-wheel"><i></i></div><span>THE FIELD RESPONDS</span>
+  <div class="tw-scroll"><span>SCROLL TO EXPLORE</span><i></i></div>
+</section>
+
+<section class="tw-story" id="story">
+  <div class="tw-section-no">02 / THE BUILDER</div>
+  <div class="tw-story-grid">
+    <h2>I don't just write <span>code.</span><br>I build systems.</h2>
+    <div class="tw-story-copy"><p>I'm a Software Engineering student at NUML Islamabad with almost two years of practical experience across <b>Java development, full-stack applications, data analytics, business intelligence and UI/UX.</b></p><p>My long-term goal is to build a software house delivering practical PC, web, Android, AI and automation solutions.</p><a href="about.html" class="tw-underlink">More about me <b>↗</b></a></div>
   </div>
 </section>
 
-<section class="cin-intro-section" id="about">
-  <div class="wrap">
-    <div class="section-index">02 <span>/</span> ABOUT THE BUILDER</div>
-    <div class="statement-grid">
-      <h2>I turn ideas into <span>working systems.</span></h2>
-      <div><p>I'm <b>Muhammad Zarar Waleed</b>, a Software Engineering student at NUML Islamabad with almost two years of practical experience.</p>
-      <p>I work across Java development, full-stack applications, data analytics, business intelligence, UI/UX and custom IT solutions — with a long-term goal of building my own software house.</p>
-      <a class="line-link" href="about.html">More about me <b>↗</b></a></div>
-    </div>
+<section class="tw-products" id="work">
+  <div class="tw-section-no">03 / SELECTED PRODUCTS</div>
+  <div class="tw-products-head"><h2>Three ideas.<br><span>Three worlds.</span></h2><p>Real software directions I'm building — presented as products, not generic portfolio cards.</p></div>
+  <div class="tw-product-stack">
+    <a class="tw-product recovery" href="recovery.html"><div class="p-glow"></div><div class="p-number">01</div><div class="p-copy"><small>DESKTOP · JAVA · v1.0.0</small><h3>TECH-WORLD<br><span>DATA RECOVERY</span></h3><p>Disk-image recovery, fragment detection, reconstruction, reporting and professional recovery workflows.</p><b>VIEW PRODUCT ↗</b></div><div class="p-media"><img src="assets/recovery/console.png" alt="TECH-WORLD Data Recovery console"><div class="media-label">LIVE SOFTWARE PREVIEW</div></div></a>
+    <a class="tw-product sentry" href="sentry.html"><div class="p-number">02</div><div class="p-copy"><small>WEB-BASED · SURVEILLANCE</small><h3>SENTRY-1<br><span>CCTV / DVR</span></h3><p>Multi-camera monitoring, recording, playback and smart alert workflows for real-world security.</p><b>VIEW PRODUCT ↗</b></div><div class="sentry-visual"><div class="cam cam-a">CAM 01</div><div class="cam cam-b">CAM 02</div><div class="cam cam-c">CAM 03</div><div class="sentry-center">SENTRY<br><span>01</span></div></div></a>
+    <a class="tw-product neural" href="neural-threads.html"><div class="p-number">03</div><div class="p-copy"><small>AI · AUTOMATION · VIBECODING</small><h3>NEURAL<br><span>THREADS</span></h3><p>AI agents, automation, custom tools and intelligent dashboards — weaving intelligence into work.</p><b>VIEW ECOSYSTEM ↗</b></div><div class="neural-visual"><div class="neural-core">NT</div><i></i><i></i><i></i><i></i></div></a>
   </div>
 </section>
 
-<section class="cin-projects">
-  <div class="wrap">
-    <div class="section-index">03 <span>/</span> SELECTED WORK</div>
-    <div class="project-intro"><h2>Products with a <span>purpose.</span></h2><p>Not just concepts. These are the software directions I'm actually building.</p></div>
-    <div class="cin-project-stack">
-      <a class="cin-project project-recovery" href="recovery.html">
-        <div class="project-glow"></div><div class="project-no">01</div>
-        <div class="project-content"><small>DESKTOP APPLICATION · v1.0.0</small><h3>TECH-WORLD<br><span>DATA RECOVERY</span></h3><p>Professional recovery tooling for disk images, fragments, reconstruction and forensic workflows.</p><b class="project-arrow">VIEW PRODUCT ↗</b></div>
-        <div class="project-visual"><img src="assets/recovery/console.png" alt="TECH-WORLD Data Recovery console"><div class="screen-frame"></div></div>
-      </a>
-      <a class="cin-project project-sentry" href="sentry.html">
-        <div class="project-no">02</div><div class="project-content"><small>WEB-BASED · SURVEILLANCE</small><h3>SENTRY-1<br><span>CCTV / DVR</span></h3><p>Multi-camera monitoring, recording, playback and smart alert workflows for real-world security.</p><b class="project-arrow">VIEW PROJECT ↗</b></div>
-        <div class="project-visual sentry-visual"><div class="camera-orb">◉</div><div class="camera-grid"><i></i><i></i><i></i><i></i></div></div>
-      </a>
-      <a class="cin-project project-neural" href="neural-threads.html">
-        <div class="project-no">03</div><div class="project-content"><small>AI · AUTOMATION · VIBECODING</small><h3>NEURAL<br><span>THREADS</span></h3><p>AI agents, automation, custom tools and intelligent dashboards — weaving intelligence into work.</p><b class="project-arrow">VIEW ECOSYSTEM ↗</b></div>
-        <div class="project-visual thread-visual"><div class="thread-core">NT</div><div class="thread-lines"></div></div>
-      </a>
-    </div>
-  </div>
+<section class="tw-skills">
+  <div class="tw-section-no">04 / CAPABILITIES</div>
+  <div class="tw-skills-grid"><h2>CODE<br><span>DATA</span><br>DESIGN</h2><div class="tw-skill-list"><div><b>01</b><strong>Java Development</strong><span>Desktop & application engineering</span></div><div><b>02</b><strong>Full-Stack Development</strong><span>Frontend · Backend · Web</span></div><div><b>03</b><strong>Data Analytics & BI</strong><span>Cleaning · analysis · dashboards</span></div><div><b>04</b><strong>UI / UX Design</strong><span>Interfaces · visual systems</span></div><div><b>05</b><strong>AI Automation</strong><span>Agents · workflows · intelligent tools</span></div><div><b>06</b><strong>Custom IT Solutions</strong><span>Software built around real problems</span></div></div></div>
 </section>
 
-<section class="cin-capabilities">
-  <div class="wrap">
-    <div class="section-index">04 <span>/</span> CAPABILITIES</div>
-    <div class="cap-grid">
-      <div class="cap-copy"><h2>One stack.<br><span>Many directions.</span></h2><p>Development, data and design are not separate lanes in my workflow. They connect.</p></div>
-      <div class="cap-list">
-        <div><b>01</b><strong>Java Development</strong><span>Desktop & application engineering</span></div>
-        <div><b>02</b><strong>Full-Stack Development</strong><span>Frontend · Backend · Web</span></div>
-        <div><b>03</b><strong>Data Analytics & BI</strong><span>Cleaning · analysis · dashboards</span></div>
-        <div><b>04</b><strong>UI / UX Design</strong><span>Interfaces · visual systems</span></div>
-        <div><b>05</b><strong>AI Automation</strong><span>Agents · workflows · intelligent tools</span></div>
-        <div><b>06</b><strong>Custom IT Solutions</strong><span>Software built around real problems</span></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="cin-ending">
-  <div class="ending-radial"></div>
-  <div class="wrap">
-    <div class="section-index">05 <span>/</span> NEXT THREAD</div>
-    <h2>Have an idea?<br><span>Let's build it.</span></h2>
-    <p>Software, analytics, automation or a digital product — start the conversation.</p>
-    <a class="cin-btn primary big" href="contact.html"><span>Start a Conversation</span><b>↗</b></a>
-    <div class="ending-signature"><span>MUHAMMAD ZARAR WALEED</span><i></i><span>TECH-WORLD SOFTWARES</span></div>
-  </div>
-</section>
+<section class="tw-final"><div class="final-orb"></div><div class="tw-section-no">05 / NEXT THREAD</div><h2>Have an idea?<br><span>Let's build it.</span></h2><p>Software · analytics · automation · digital products.</p><a href="contact.html" class="tw-btn big">Start a conversation <b>↗</b></a><div class="final-sign">MUHAMMAD ZARAR WALEED <i></i> TECH-WORLD SOFTWARES</div></section>
 </main>
+<footer class="tw-footer"><span>© 2026 TECH-WORLD SOFTWARES by ZARAR SHAKIR</span><span>CODE · AUTOMATE · INNOVATE</span></footer>
 
-<footer class="cin-footer"><div class="wrap"><span>© 2026 TECH-WORLD SOFTWARES by ZARAR SHAKIR</span><span>CODE · AUTOMATE · INNOVATE</span></div></footer>
-
-<script src="main.js"></script>
-<script type="module">
-import * as THREE from './three.module.min.js';
-const host=document.getElementById('heroVisual');
-if(host && !matchMedia('(prefers-reduced-motion: reduce)').matches){
-  const scene=new THREE.Scene();
-  const camera=new THREE.PerspectiveCamera(42,1,.1,100); camera.position.z=7;
-  const renderer=new THREE.WebGLRenderer({alpha:true,antialias:true});
-  renderer.setPixelRatio(Math.min(devicePixelRatio||1,1.5)); renderer.setClearColor(0,0); host.prepend(renderer.domElement);
-  const group=new THREE.Group(); scene.add(group);
-  const core=new THREE.Mesh(new THREE.IcosahedronGeometry(1.02,2),new THREE.MeshBasicMaterial({color:0x111b35,wireframe:true,transparent:true,opacity:.22}));
-  group.add(core);
-  const mat1=new THREE.MeshBasicMaterial({color:0x4dd9ff,transparent:true,opacity:.55});
-  const mat2=new THREE.MeshBasicMaterial({color:0x9a62ff,transparent:true,opacity:.42});
-  const r1=new THREE.Mesh(new THREE.TorusGeometry(1.7,.012,8,120),mat1);
-  const r2=new THREE.Mesh(new THREE.TorusGeometry(2.05,.009,8,120),mat2);
-  r1.rotation.x=.9; r1.rotation.y=.2; r2.rotation.x=-.55; r2.rotation.z=.7; group.add(r1,r2);
-  const geo=new THREE.BufferGeometry(); const arr=[];
-  for(let i=0;i<120;i++){const t=Math.random()*Math.PI*2, rr=2.15+Math.random()*1.25; arr.push(Math.cos(t)*rr,(Math.random()-.5)*1.8,Math.sin(t)*rr);}
-  geo.setAttribute('position',new THREE.Float32BufferAttribute(arr,3));
-  const stars=new THREE.Points(geo,new THREE.PointsMaterial({color:0x6fdcff,size:.025,transparent:true,opacity:.7}));
-  group.add(stars);
-  let mx=0,my=0;
-  host.addEventListener('pointermove',e=>{const r=host.getBoundingClientRect();mx=(e.clientX-r.left)/r.width-.5;my=(e.clientY-r.top)/r.height-.5},{passive:true});
-  function resize(){const r=host.getBoundingClientRect();renderer.setSize(r.width,r.height,false);camera.aspect=r.width/r.height;camera.updateProjectionMatrix();}
-  resize(); addEventListener('resize',resize,{passive:true});
-  const clock=new THREE.Clock();
-  function tick(){const t=clock.getElapsedTime(); group.rotation.y+=.0018; group.rotation.x=Math.sin(t*.25)*.05; group.rotation.y+=mx*.002; group.rotation.x+=my*.001; r1.rotation.z+=.003; r2.rotation.z-=.002; stars.rotation.y=-t*.018; renderer.render(scene,camera); requestAnimationFrame(tick);}
-  tick();
-}
-</script>
-<script>
-(function(){
-  const hero=document.getElementById('heroVisual'), portrait=document.getElementById('portraitWrap');
-  if(!hero||!portrait||matchMedia('(pointer:coarse)').matches)return;
-  let tx=0,ty=0,cx=0,cy=0;
-  hero.addEventListener('pointermove',e=>{const r=hero.getBoundingClientRect();tx=((e.clientX-r.left)/r.width-.5)*18;ty=((e.clientY-r.top)/r.height-.5)*-14;});
-  hero.addEventListener('pointerleave',()=>{tx=0;ty=0;});
-  function frame(){cx+=(tx-cx)*.055;cy+=(ty-cy)*.055;portrait.style.transform=`translate3d(${cx}px,${cy}px,0) rotateX(${cy*.18}deg) rotateY(${cx*.14}deg)`;requestAnimationFrame(frame)} frame();
-  const bar=document.querySelector('.scroll-line span');
-  addEventListener('scroll',()=>{const max=document.documentElement.scrollHeight-innerHeight; if(bar)bar.style.transform=`scaleX(${max>0?scrollY/max:0})`},{passive:true});
-})();
-</script>
+<script src="cinematic-home.js"></script>
 </body>
 </html>

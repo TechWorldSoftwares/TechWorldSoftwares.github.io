@@ -1,5 +1,5 @@
 
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Sora:wght@400;500;600;700&display=swap');
 
 :root{
   --bg:#04050b;
@@ -22,13 +22,13 @@ html{scroll-behavior:smooth}
 body{background:
  radial-gradient(900px 500px at 12% 8%,rgba(77,163,255,.10),transparent 62%),
  radial-gradient(900px 600px at 88% 22%,rgba(139,92,246,.10),transparent 62%),
- var(--bg);color:var(--text);font-family:Inter,system-ui,sans-serif;overflow-x:hidden;line-height:1.5}
+ var(--bg);color:var(--text);font-family:"DM Sans",system-ui,sans-serif;overflow-x:hidden;line-height:1.6;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
 body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;background-image:linear-gradient(rgba(255,255,255,.018) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.018) 1px,transparent 1px);background-size:64px 64px;mask-image:linear-gradient(to bottom,black,transparent 80%)}
 ::selection{background:var(--purple);color:white}
 a{color:inherit;text-decoration:none}
 img{max-width:100%;display:block}
 button,input,textarea{font:inherit}
-h1,h2,h3,h4,h5{font-family:"Space Grotesk",sans-serif;letter-spacing:-.025em}
+h1,h2,h3,h4,h5{font-family:"Sora",sans-serif;letter-spacing:-.025em}
 .wrap{width:min(1180px,calc(100% - 40px));margin:auto;position:relative;z-index:2}
 
 #neuralCanvas{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;opacity:.9}
@@ -63,7 +63,7 @@ nav .wrap{height:66px;padding:0 18px;display:flex;align-items:center;justify-con
 .btn-ghost:hover{border-color:rgba(98,217,255,.35);box-shadow:0 12px 30px rgba(77,163,255,.08)}
 .hero-stats{display:flex;gap:10px;flex-wrap:wrap;margin-top:42px}
 .hero-stat{min-width:120px;padding:13px 15px;border:1px solid var(--line);border-radius:14px;background:rgba(255,255,255,.025);backdrop-filter:blur(10px)}
-.hero-stat b{display:block;font:700 22px "Space Grotesk";color:#fff}
+.hero-stat b{display:block;font:700 22px "Sora";color:#fff}
 .hero-stat span{display:block;margin-top:2px;font-size:10px;color:var(--faint);text-transform:uppercase;letter-spacing:.08em}
 
 .hero-stage{min-height:620px;position:relative;display:grid;place-items:center}
@@ -127,14 +127,14 @@ section{position:relative;z-index:3;padding:110px 0}
 .products-grid,.download-cards,.pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 .download-cards{grid-template-columns:repeat(2,1fr);max-width:900px;margin:auto}
 .dl-card{padding:30px}.dl-big-icon{font-size:40px;margin-bottom:14px}.dl-card h3{font-size:25px}.dl-card p{color:var(--muted);margin:8px 0 22px}
-.pricing-grid{grid-template-columns:repeat(2,1fr);max-width:900px;margin:auto}.price-card{padding:26px}.price-card.highlight{border-color:rgba(98,217,255,.38)}.price-badge{font:600 10px "JetBrains Mono";color:var(--cyan)}.price{font-size:40px;font-family:"Space Grotesk";font-weight:700;margin:12px 0}.period{color:var(--muted);font-size:12px}.check{color:#78f5bb;font-size:13px;margin-top:8px}
+.pricing-grid{grid-template-columns:repeat(2,1fr);max-width:900px;margin:auto}.price-card{padding:26px}.price-card.highlight{border-color:rgba(98,217,255,.38)}.price-badge{font:600 10px "JetBrains Mono";color:var(--cyan)}.price{font-size:40px;font-family:"Sora";font-weight:700;margin:12px 0}.period{color:var(--muted);font-size:12px}.check{color:#78f5bb;font-size:13px;margin-top:8px}
 .calc-card{padding:25px;max-width:700px;margin:35px auto}.duration-options{display:flex;gap:10px;flex-wrap:wrap}.duration-opt{padding:10px 14px;border:1px solid var(--line);border-radius:10px;cursor:pointer}.duration-opt.selected{border-color:var(--blue);background:rgba(77,163,255,.1)}.calc-total{font-size:28px;margin-top:20px}.d-label{color:var(--muted);font-size:12px}.amount{font-weight:700}.d-save{color:#78f5bb;font-size:11px}
 
 .contact-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:16px;max-width:950px;margin:auto}.contact-card{padding:28px}.contact-row{display:flex;gap:14px;padding:16px 0;border-bottom:1px solid var(--line)}.contact-row:last-child{border-bottom:0}.c-icon{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;background:rgba(77,163,255,.09);color:var(--cyan)}.contact-row b{display:block}.contact-row span{display:block;color:var(--muted);font-size:12px;margin-top:3px}.contact-form{display:grid;gap:11px}.contact-form input,.contact-form textarea,.license-input{width:100%;background:rgba(0,0,0,.25);border:1px solid var(--line);border-radius:12px;color:#fff;padding:13px 14px;outline:none}.contact-form textarea{min-height:150px;resize:vertical}.contact-form input:focus,.contact-form textarea:focus,.license-input:focus{border-color:rgba(98,217,255,.5);box-shadow:0 0 0 3px rgba(77,163,255,.07)}
 
 .faq-list{max-width:850px;margin:auto}.faq-item{margin-bottom:10px;overflow:hidden;cursor:pointer}.faq-q{padding:19px 20px;font-weight:700;display:flex;justify-content:space-between;gap:20px}.arrow{color:var(--cyan);transition:.2s}.faq-a{max-height:0;overflow:hidden;transition:max-height .3s ease}.faq-a p{padding:0 20px 20px;color:var(--muted);font-size:13px;line-height:1.7}.faq-item.open .faq-a{max-height:300px}.faq-item.open .arrow{transform:rotate(180deg)}
 
-.about-wrap{display:grid;grid-template-columns:.8fr 1.2fr;gap:60px;align-items:center}.about-visual{display:grid;place-items:center}.about-visual img{width:min(300px,100%);filter:drop-shadow(0 0 40px rgba(77,163,255,.2))}.name{font:700 26px "Space Grotesk";margin-top:25px}.role{color:var(--cyan);font-size:12px;margin-top:3px}
+.about-wrap{display:grid;grid-template-columns:.8fr 1.2fr;gap:60px;align-items:center}.about-visual{display:grid;place-items:center}.about-visual img{width:min(300px,100%);filter:drop-shadow(0 0 40px rgba(77,163,255,.2))}.name{font:700 26px "Sora";margin-top:25px}.role{color:var(--cyan);font-size:12px;margin-top:3px}
 
 .social-row{display:flex;gap:9px;margin-top:18px}.social-icon{width:38px;height:38px;display:grid;place-items:center;border:1px solid var(--line);border-radius:11px;color:var(--muted);transition:.2s}.social-icon:hover{color:#fff;border-color:rgba(98,217,255,.4);transform:translateY(-3px)}
 footer{position:relative;z-index:3;padding:65px 0 30px;border-top:1px solid var(--line);background:rgba(3,4,9,.65)}

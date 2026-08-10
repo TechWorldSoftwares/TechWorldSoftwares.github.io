@@ -52,6 +52,19 @@
   </div>
 </section>
 <section>
+  <div class="wrap">
+    <div class="section-head reveal"><div class="section-label">// ACTUAL SOFTWARE</div><h2 class="section-title">See the product in action.</h2><p class="section-desc">These are real screenshots from TECH-WORLD Data Recovery v1.0.0 — from cold boot and authentication to the recovery console.</p></div>
+    <div class="recovery-gallery">
+      <button class="recovery-shot reveal" data-full="assets/recovery/welcome.png"><img src="assets/recovery/welcome.png" alt="TECH-WORLD Data Recovery welcome screen"><span>01 · Welcome / Cold Boot</span></button>
+      <button class="recovery-shot reveal" data-full="assets/recovery/login.png"><img src="assets/recovery/login.png" alt="TECH-WORLD Data Recovery login screen"><span>02 · Authentication</span></button>
+      <button class="recovery-shot reveal" data-full="assets/recovery/about.png"><img src="assets/recovery/about.png" alt="TECH-WORLD Data Recovery product dashboard"><span>03 · Product Dashboard</span></button>
+      <button class="recovery-shot recovery-shot-wide reveal" data-full="assets/recovery/console.png"><img src="assets/recovery/console.png" alt="TECH-WORLD Data Recovery recovery console"><span>04 · Recovery Console</span></button>
+    </div>
+  </div>
+</section>
+<div class="image-lightbox" id="recoveryLightbox" aria-hidden="true"><button onclick="closeRecoveryShot()" aria-label="Close">×</button><img id="recoveryLightboxImg" alt="Expanded software screenshot"></div>
+
+<section>
   <div class="wrap center" style="max-width:640px;">
     <span class="section-label reveal">// Formats supported</span>
     <h2 class="section-title reveal center">JPG &middot; PNG &middot; PDF &middot; DOCX &middot; SQLite</h2>
@@ -92,5 +105,13 @@
 <div class="footer-col"><h5>Connect</h5><a href="experience.html">Experience</a><a href="certificates.html">Certificates</a><a href="contact.html">Contact</a><a href="recovery.html">Data Recovery</a></div></div></div>
 <div class="footer-bottom"><span>© 2026 TECH-WORLD SOFTWARES by ZARAR SHAKIR. All rights reserved.</span><span class="mono">Code · Automate · Innovate</span></div></div></footer>
 <script src="main.js"></script>
+
+<style>
+.recovery-gallery{display:grid;grid-template-columns:1fr 1fr;gap:16px}.recovery-shot{position:relative;padding:0;border:1px solid rgba(130,150,210,.16);border-radius:20px;overflow:hidden;background:#070914;cursor:pointer;text-align:left;box-shadow:0 24px 70px rgba(0,0,0,.28);transition:.3s transform,.3s border-color,.3s box-shadow}.recovery-shot:hover{transform:translateY(-7px);border-color:rgba(98,217,255,.35);box-shadow:0 32px 85px rgba(0,0,0,.4),0 0 35px rgba(77,163,255,.08)}.recovery-shot img{width:100%;aspect-ratio:16/9;object-fit:cover;display:block}.recovery-shot-wide{grid-column:1/-1}.recovery-shot span{display:block;padding:13px 15px;color:#cfe5ff;font:600 10px 'JetBrains Mono';letter-spacing:.08em;background:rgba(6,8,17,.92)}.image-lightbox{position:fixed;inset:0;background:rgba(1,2,7,.92);backdrop-filter:blur(18px);z-index:300;display:none;place-items:center;padding:30px}.image-lightbox.open{display:grid}.image-lightbox img{max-width:min(1400px,94vw);max-height:90vh;object-fit:contain;border:1px solid rgba(98,217,255,.24);box-shadow:0 30px 120px #000}.image-lightbox button{position:absolute;right:25px;top:20px;width:46px;height:46px;border:1px solid rgba(255,255,255,.15);border-radius:50%;background:rgba(255,255,255,.06);color:white;font-size:28px;cursor:pointer}@media(max-width:700px){.recovery-gallery{grid-template-columns:1fr}.recovery-shot-wide{grid-column:auto}}
+</style>
+<script>
+function closeRecoveryShot(){const b=document.getElementById('recoveryLightbox');b.classList.remove('open');b.setAttribute('aria-hidden','true')}
+document.addEventListener('DOMContentLoaded',()=>{document.querySelectorAll('.recovery-shot').forEach(s=>s.addEventListener('click',()=>{const b=document.getElementById('recoveryLightbox');document.getElementById('recoveryLightboxImg').src=s.dataset.full;b.classList.add('open');b.setAttribute('aria-hidden','false')}));document.getElementById('recoveryLightbox')?.addEventListener('click',e=>{if(e.target.id==='recoveryLightbox')closeRecoveryShot()})});
+</script>
 </body>
 </html>

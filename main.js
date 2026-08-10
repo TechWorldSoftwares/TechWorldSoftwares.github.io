@@ -1,88 +1,27 @@
-/* =========================================================================
-   LANDING PAGE: "Press Enter to continue" cinematic slide navigation.
-   Purely additive — normal mouse-wheel/trackpad scrolling still works
-   exactly like a regular page. Enter/Space just smooth-scrolls to the
-   next full-screen section with a brief fade transition.
-   ========================================================================= */
-function advanceSlide() {
-  const slides = Array.from(document.querySelectorAll('[data-slide]'));
-  if (slides.length === 0) return;
 
-  const scrollPos = window.scrollY + 10;
-  let currentIndex = 0;
-  slides.forEach((s, i) => { if (s.offsetTop <= scrollPos) currentIndex = i; });
-
-  const next = slides[currentIndex + 1];
-  if (!next) return; // already at the last slide — let normal scroll take over
-
-  const overlay = document.getElementById('slideTransitionOverlay');
-  if (overlay) {
-    overlay.classList.add('active');
-    setTimeout(() => {
-      next.scrollIntoView({ behavior: 'auto', block: 'start' });
-      requestAnimationFrame(() => overlay.classList.remove('active'));
-    }, 220);
-  } else {
-    next.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  }
-}
-
-document.addEventListener('DOMContentLoaded', () => {
-  if (document.querySelector('[data-slide]')) {
-    if (!document.getElementById('slideTransitionOverlay')) {
-      const overlay = document.createElement('div');
-      overlay.id = 'slideTransitionOverlay';
-      overlay.className = 'slide-transition-overlay';
-      document.body.appendChild(overlay);
-    }
-    document.addEventListener('keydown', e => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        advanceSlide();
-      }
-    });
-  }
-});
 function toggleNav(){
-  document.querySelector('.nav-links').classList.toggle('open');
+  const nav=document.querySelector('.nav-links');
+  if(nav) nav.classList.toggle('open');
 }
-
-/* ============== Scroll reveal ============== */
-const revealObserver = new IntersectionObserver(entries => {
-  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
-}, { threshold: 0.15 });
-document.addEventListener('DOMContentLoaded', () => {
-  document.querySelectorAll('.reveal, .reveal-l, .reveal-r').forEach(el => revealObserver.observe(el));
+document.addEventListener('click',e=>{
+  const nav=document.querySelector('.nav-links');
+  if(nav && nav.classList.contains('open') && !e.target.closest('nav')) nav.classList.remove('open');
 });
-
-/* ============== 3D tilt on hover ============== */
-function addTilt(card) {
-  card.addEventListener('mousemove', e => {
-    const rect = card.getBoundingClientRect();
-    const x = e.clientX - rect.left, y = e.clientY - rect.top;
-    const rotateX = ((y / rect.height) - 0.5) * -10;
-    const rotateY = ((x / rect.width) - 0.5) * 10;
-    card.style.transform = `perspective(900px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.015)`;
-  });
-  card.addEventListener('mouseleave', () => {
-    card.style.transform = 'perspective(900px) rotateX(0) rotateY(0) scale(1)';
-  });
-}
-document.addEventListener('DOMContentLoaded', () => {
-  document.querySelectorAll('.product-card, .dl-card').forEach(addTilt);
-});
-
-/* ============== Modal helpers ============== */
-function openModal(id) { const el = document.getElementById(id); if (el) el.classList.add('open'); }
-function closeModal(id) { const el = document.getElementById(id); if (el) el.classList.remove('open'); }
-document.addEventListener('DOMContentLoaded', () => {
-  document.querySelectorAll('.modal-backdrop').forEach(el => {
-    el.addEventListener('click', e => { if (e.target === el) closeModal(el.id); });
+const revealObserver = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in')});
+},{threshold:.12});
+document.addEventListener('DOMContentLoaded',()=>{
+  document.querySelectorAll('.reveal,.reveal-l,.reveal-r').forEach(el=>revealObserver.observe(el));
+  document.querySelectorAll('.product-card,.skill-card,.service-card,.dl-card').forEach(card=>{
+    card.addEventListener('mousemove',e=>{
+      if(window.matchMedia('(pointer:coarse)').matches)return;
+      const r=card.getBoundingClientRect(), x=(e.clientX-r.left)/r.width-.5, y=(e.clientY-r.top)/r.height-.5;
+      card.style.transform=`perspective(900px) rotateX(${-y*5}deg) rotateY(${x*5}deg) translateY(-4px)`;
+    });
+    card.addEventListener('mouseleave',()=>card.style.transform='');
   });
 });
-
-/* ============== FAQ accordion ============== */
-function toggleFaq(item){ item.classList.toggle('open'); }
+function toggleFaq(item){item.classList.toggle('open')}
 
 /* =========================================================================
    REAL LICENSE VERIFICATION — same RSA public key / SHA256withRSA scheme
@@ -144,84 +83,66 @@ async function verifyAndDownload() {
   setTimeout(() => { if (pendingDownloadUrl) window.location.href = pendingDownloadUrl; closeModal('licenseModal'); }, 900);
 }
 
-/* =========================================================================
-   FULL-PAGE NEURAL PARTICLE BACKGROUND — shared on every page
-   ========================================================================= */
-document.addEventListener('DOMContentLoaded', () => {
-  const canvas = document.getElementById('neuralCanvas');
-  if (!canvas) return;
-  const ctx = canvas.getContext('2d');
-  let W, H;
-  function resize(){ W = canvas.width = window.innerWidth; H = canvas.height = document.documentElement.scrollHeight; }
-  window.addEventListener('resize', resize);
-  new ResizeObserver(resize).observe(document.body);
-  resize();
 
-  const COUNT = Math.min(130, Math.floor((window.innerWidth * window.innerHeight) / 16000));
-  const particles = [];
-  for (let i = 0; i < COUNT; i++) {
-    particles.push({
-      x: Math.random() * W, y: Math.random() * H,
-      r: 1 + Math.random() * 1.8, vy: 0.08 + Math.random() * 0.18,
-      a: 0.15 + Math.random() * 0.35,
-      color: Math.random() < 0.55 ? '56,189,248' : '124,58,237'
-    });
+
+/* Interactive neural field: mouse -> nearby nodes -> living threads */
+document.addEventListener('DOMContentLoaded',()=>{
+  const canvas=document.getElementById('neuralCanvas');
+  if(!canvas)return;
+  const ctx=canvas.getContext('2d');
+  let W=0,H=0,dpr=1;
+  const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const isMobile=window.matchMedia('(max-width: 700px)').matches;
+  let count=isMobile?48:Math.min(105,Math.floor(innerWidth*innerHeight/15000));
+  const pts=[];
+  const mouse={x:-9999,y:-9999,active:false};
+  function resize(){
+    dpr=Math.min(devicePixelRatio||1,1.7); W=innerWidth; H=innerHeight;
+    canvas.width=W*dpr;canvas.height=H*dpr;canvas.style.width=W+'px';canvas.style.height=H+'px';
+    ctx.setTransform(dpr,0,0,dpr,0,0);
   }
-  let mouse = { x: -9999, y: -9999 };
-  window.addEventListener('mousemove', e => { mouse.x = e.clientX; mouse.y = e.clientY + window.scrollY; });
-  window.addEventListener('mouseleave', () => { mouse.x = -9999; mouse.y = -9999; });
-  const CONNECT_RADIUS = 160;
-
-  // --- Neural threads connect to the photo's on-screen position ---
-  // (the photo itself now rotates in real 3D via Three.js, see the module script in index.html)
-  const profileWrap = document.getElementById('profileWrap');
-  let photoCenter = null;
-  function updatePhotoCenter() {
-    if (!profileWrap) { photoCenter = null; return; }
-    const rect = profileWrap.getBoundingClientRect();
-    photoCenter = { x: rect.left + rect.width / 2, y: rect.top + rect.height / 2 + window.scrollY };
-  }
-  updatePhotoCenter();
-  window.addEventListener('resize', updatePhotoCenter);
-  window.addEventListener('scroll', updatePhotoCenter);
-  const PHOTO_CONNECT_RADIUS = 260;
-
-  function tick(){
-    ctx.clearRect(0, 0, W, H);
-    const scrollY = window.scrollY;
-    const viewTop = scrollY, viewBottom = scrollY + window.innerHeight;
-    for (const p of particles) {
-      p.y -= p.vy;
-      if (p.y < -10) { p.y = H + 10; p.x = Math.random() * W; }
-      if (p.y < viewTop - 100 || p.y > viewBottom + 100) continue;
-
-      const dx = p.x - mouse.x, dy = p.y - mouse.y;
-      const dist = Math.sqrt(dx*dx + dy*dy);
-      if (dist < CONNECT_RADIUS) {
-        const alpha = (1 - dist / CONNECT_RADIUS) * 0.45;
-        ctx.strokeStyle = `rgba(56,189,248,${alpha})`;
-        ctx.lineWidth = 1;
-        ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(mouse.x, mouse.y); ctx.stroke();
+  resize(); addEventListener('resize',resize,{passive:true});
+  for(let i=0;i<count;i++)pts.push({
+    x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.16,vy:(Math.random()-.5)*.16,
+    r:.7+Math.random()*1.4,p:Math.random(),phase:Math.random()*Math.PI*2
+  });
+  addEventListener('mousemove',e=>{mouse.x=e.clientX;mouse.y=e.clientY;mouse.active=true},{passive:true});
+  addEventListener('mouseleave',()=>mouse.active=false);
+  function frame(t){
+    ctx.clearRect(0,0,W,H);
+    for(const p of pts){
+      p.phase+=.008;
+      p.x+=p.vx+Math.cos(p.phase)*.05;p.y+=p.vy+Math.sin(p.phase*.8)*.05;
+      if(p.x<-20)p.x=W+20;if(p.x>W+20)p.x=-20;if(p.y<-20)p.y=H+20;if(p.y>H+20)p.y=-20;
+      if(mouse.active && !reduced){
+        const dx=p.x-mouse.x,dy=p.y-mouse.y,d=Math.hypot(dx,dy);
+        if(d<150){const f=(1-d/150)*.035;p.x+=dx*f;p.y+=dy*f}
       }
-
-      if (photoCenter) {
-        const pdx = p.x - photoCenter.x, pdy = p.y - photoCenter.y;
-        const pdist = Math.sqrt(pdx*pdx + pdy*pdy);
-        if (pdist < PHOTO_CONNECT_RADIUS) {
-          const palpha = (1 - pdist / PHOTO_CONNECT_RADIUS) * 0.35;
-          ctx.strokeStyle = `rgba(124,58,237,${palpha})`;
-          ctx.lineWidth = 1;
-          ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(photoCenter.x, photoCenter.y); ctx.stroke();
+    }
+    const radius=isMobile?105:145;
+    for(let i=0;i<pts.length;i++){
+      const a=pts[i];
+      for(let j=i+1;j<pts.length;j++){
+        const b=pts[j],d=Math.hypot(a.x-b.x,a.y-b.y);
+        if(d<radius){
+          const alpha=(1-d/radius)*.14;
+          ctx.strokeStyle=`rgba(139,92,246,${alpha})`;ctx.lineWidth=.65;
+          ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke();
         }
       }
-
-      const grad = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r * 3);
-      grad.addColorStop(0, `rgba(${p.color},${p.a})`);
-      grad.addColorStop(1, `rgba(${p.color},0)`);
-      ctx.fillStyle = grad;
-      ctx.beginPath(); ctx.arc(p.x, p.y, p.r * 3, 0, Math.PI * 2); ctx.fill();
+      if(mouse.active && !reduced){
+        const d=Math.hypot(a.x-mouse.x,a.y-mouse.y);
+        if(d<radius){
+          const alpha=(1-d/radius)*.5;
+          ctx.strokeStyle=`rgba(98,217,255,${alpha})`;ctx.lineWidth=1;
+          ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(mouse.x,mouse.y);ctx.stroke();
+        }
+      }
+      const glow=ctx.createRadialGradient(a.x,a.y,0,a.x,a.y,a.r*4);
+      glow.addColorStop(0,`rgba(98,217,255,.6)`);glow.addColorStop(1,'rgba(98,217,255,0)');
+      ctx.fillStyle=glow;ctx.beginPath();ctx.arc(a.x,a.y,a.r*4,0,Math.PI*2);ctx.fill();
     }
-    requestAnimationFrame(tick);
+    if(!reduced)requestAnimationFrame(frame);
   }
-  tick();
+  requestAnimationFrame(frame);
 });

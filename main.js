@@ -146,3 +146,22 @@ document.addEventListener('DOMContentLoaded',()=>{
   }
   requestAnimationFrame(frame);
 });
+
+
+/* Cinematic page navigation: Enter advances through the primary navigation. */
+document.addEventListener('DOMContentLoaded',()=>{
+  document.body.classList.add('page-enter');
+  requestAnimationFrame(()=>document.body.classList.add('page-enter-ready'));
+  document.addEventListener('keydown',(e)=>{
+    if(e.key !== 'Enter' || e.ctrlKey || e.altKey || e.metaKey) return;
+    const tag=(document.activeElement?.tagName||'').toLowerCase();
+    if(['input','textarea','select','button'].includes(tag)) return;
+    const links=[...document.querySelectorAll('.nav-links a')];
+    const current=links.findIndex(a=>a.classList.contains('active'));
+    if(current<0 || !links.length) return;
+    e.preventDefault();
+    const next=links[(current+1)%links.length];
+    document.body.classList.remove('page-enter-ready');
+    setTimeout(()=>{ window.location.href=next.href; },280);
+  });
+});

@@ -159,3 +159,6 @@ footer{position:relative;z-index:3;padding:65px 0 30px;border-top:1px solid var(
  .page-hero{min-height:45vh}.page-hero .wrap{padding:65px 0}.page-hero h1{font-size:42px}
 }
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.001ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.001ms!important}}
+
+/* Product downloads & screenshot gallery */
+.recovery-gallery{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin-top:28px}.recovery-gallery a{display:block;border:1px solid var(--line);border-radius:18px;overflow:hidden;background:rgba(10,13,28,.65);box-shadow:0 20px 60px rgba(0,0,0,.25);transition:transform .35s ease,border-color .35s ease,box-shadow .35s ease}.recovery-gallery a:hover{transform:translateY(-6px) scale(1.01);border-color:rgba(98,217,255,.45);box-shadow:0 28px 90px rgba(77,163,255,.16)}.recovery-gallery img{width:100%;height:auto;aspect-ratio:16/9;object-fit:cover}.page-enter{opacity:0;transform:translateY(10px);transition:opacity .4s ease,transform .4s ease}.page-enter-ready{opacity:1;transform:none}@media(max-width:720px){.recovery-gallery{grid-template-columns:1fr}}
